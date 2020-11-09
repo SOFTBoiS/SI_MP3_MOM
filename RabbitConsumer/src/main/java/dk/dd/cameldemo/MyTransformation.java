@@ -24,7 +24,7 @@ public class MyTransformation {
         if(input.contains("decline")){
             return "declined";
         }
-        String reply = "Order confirmation\n" + s;
+        String reply = String.format("Order confirmation for user: %s \n%s", CamelSimple.username ,s);
         return reply;
     }
 }

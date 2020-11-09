@@ -2,5 +2,7 @@ package dk.dd.cameldemo;
 
 public enum Topic {
     TROPICAL,
-    SKI
+    SKIING,
+    MEDITERRANEAN,
+    AUTUMN
 }

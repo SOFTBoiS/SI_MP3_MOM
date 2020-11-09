@@ -66,7 +66,6 @@ public class CamelSimple extends RouteBuilder {
     }
 
     private void subscribeToTopics(){
-        // todo: Maybe add some way to dynamically add topics
         Scanner sc = new Scanner(System.in);
         System.out.println("Select a username");
         // todo: handle invalid username

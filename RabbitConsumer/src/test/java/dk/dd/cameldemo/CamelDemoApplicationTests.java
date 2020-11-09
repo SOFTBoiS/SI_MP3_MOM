@@ -1,4 +1,4 @@
-package dk.dd.rabbit;
+package dk.dd.cameldemo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RabbitApplicationTests {
+public class CamelDemoApplicationTests {
 
     @Test
     public void contextLoads() {

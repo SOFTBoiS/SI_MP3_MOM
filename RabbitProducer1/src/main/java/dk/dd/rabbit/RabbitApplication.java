@@ -18,10 +18,8 @@ import java.util.Scanner;
 
 @SpringBootApplication
 public class RabbitApplication {
-    private final static String QUEUE_SKIING = "skiing";
-    private final static String QUEUE_AUTUMN = "autumn";
-    private final static String QUEUE_MEDITERRANEAN = "mediterranean";
-    private final static String QUEUE_TROPICAL = "tropical";
+
+    private final static String[] QUEUES = {"skiing", "autumn", "mediterranean", "tropical"};
     private final static String EXCHANGE_NAME = "travel_campaigns";
 
     public static void main(String[] args) throws Exception {
@@ -31,8 +29,15 @@ public class RabbitApplication {
 
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.println("Enter topic name:");
-            String topic = sc.nextLine();
+            System.out.println("============================");
+            for (int i = 0; i<QUEUES.length; i++){
+                System.out.println(i + ":" + QUEUES[i]);
+            }
+
+            System.out.println("Enter number to select topic:");
+            String topic = QUEUES[sc.nextInt()];
+            sc.nextLine(); // Consume the line where we got the int from
+
             System.out.println("Enter offer:");
             String offer = sc.nextLine();
 
@@ -50,16 +55,16 @@ public class RabbitApplication {
 //                channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 //                channel.basicPublish(EXCHANGE_NAME, ROUTING_KEY, null, message.getBytes("UTF-8"));
             channel.exchangeDeclare(EXCHANGE_NAME, "topic", true);
-            channel.queueDeclare(QUEUE_SKIING, true, false, false, null);
-            channel.queueDeclare(QUEUE_AUTUMN, true, false, false, null);
-            channel.queueDeclare(QUEUE_MEDITERRANEAN, true, false, false, null);
-            channel.queueDeclare(QUEUE_TROPICAL, true, false, false, null);
+            channel.queueDeclare(QUEUES[0], true, false, false, null);
+            channel.queueDeclare(QUEUES[1], true, false, false, null);
+            channel.queueDeclare(QUEUES[2], true, false, false, null);
+            channel.queueDeclare(QUEUES[3], true, false, false, null);
 
 
-            channel.queueBind(QUEUE_SKIING, EXCHANGE_NAME, QUEUE_SKIING);
-            channel.queueBind(QUEUE_AUTUMN, EXCHANGE_NAME, QUEUE_AUTUMN);
-            channel.queueBind(QUEUE_MEDITERRANEAN, EXCHANGE_NAME, QUEUE_MEDITERRANEAN);
-            channel.queueBind(QUEUE_TROPICAL, EXCHANGE_NAME, QUEUE_TROPICAL);
+            channel.queueBind(QUEUES[0], EXCHANGE_NAME, QUEUES[0]);
+            channel.queueBind(QUEUES[1], EXCHANGE_NAME, QUEUES[1]);
+            channel.queueBind(QUEUES[2], EXCHANGE_NAME, QUEUES[2]);
+            channel.queueBind(QUEUES[3], EXCHANGE_NAME, QUEUES[3]);
 
 //            channel.basicPublish(EXCHANGE_NAME, routingKey, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));
         }

@@ -1,11 +1,17 @@
 package dk.dd.cameldemo;
 
-public class MyTransformation {
-    public String toUpper(String s){
-        return s.toUpperCase();
-    }
+import java.util.Scanner;
 
-    public String getLength(String s){
-        return Integer.toString(s.length());
+public class MyTransformation {
+
+    public String offer(String s){
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next();
+        System.out.println(s);
+        if(input.contains("pass")){
+            return "pass";
+        }
+        String reply = "Order confirmation\n" + s;
+        return reply;
     }
 }
